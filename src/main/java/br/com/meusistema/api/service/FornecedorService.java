@@ -7,7 +7,7 @@ import java.util.List;
 public interface FornecedorService {
     FornecedorResponseDTO criarFornecedor(FornecedorRequestDTO dto);
     List<FornecedorResponseDTO> listarTodosFornecedores();
-    FornecedorResponseDTO listarFornecedorPorId(Long id);
+    FornecedorResponseDTO buscarFornecedorPorId(Long id);
     FornecedorResponseDTO atualizarFornecedorPorId(Long id, FornecedorRequestDTO dto);
     void deletarFornecedorPorId(Long id);
 }

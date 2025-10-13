@@ -26,7 +26,7 @@ public class Produto {
     private String descricao;
 
     @Column(name = "quantidade_estoque", nullable = false)
-    private Integer quatidadeEstoque;
+    private Integer quantidadeEstoque;
 
     @ManyToOne
     @JoinColumn(name = "fornecedor_id", nullable = false)

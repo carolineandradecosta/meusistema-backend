@@ -37,7 +37,7 @@ public class FornecedorServiceImp implements FornecedorService{
     }
 
     @Override
-    public FornecedorResponseDTO listarFornecedorPorId(Long id) {
+    public FornecedorResponseDTO buscarFornecedorPorId(Long id) {
         Fornecedor fornecedor = fornecedorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado"));
         return fornecedorMapper.toDTO(fornecedor);

@@ -12,7 +12,7 @@ public record ProdutoRequestDTO(
         String nome,
 
         @NotNull(message = "Preço é obrigatório")
-        @DecimalMin(value = "0,0", message = "Preço deve ser maior que zero")
+        @DecimalMin(value = "0.0", message = "Preço deve ser maior que zero")
         BigDecimal preco,
 
         String descricao,
