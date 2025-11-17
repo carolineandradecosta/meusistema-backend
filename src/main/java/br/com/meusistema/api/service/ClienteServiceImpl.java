@@ -54,6 +54,7 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setNome(clienteRequestDTO.nome());
         cliente.setCpf(clienteRequestDTO.cpf());
         cliente.setEmail(clienteRequestDTO.email());
+        cliente.setTelefone(clienteRequestDTO.telefone());
         cliente.setEndereco(enderecoMapper.toEntity(clienteRequestDTO.endereco()));
 
         return clienteMapper.toDTO(clienteRepository.save(cliente));
