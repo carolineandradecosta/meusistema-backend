@@ -19,7 +19,7 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ClienteResponseDTO> criarCliente(@Valid @RequestBody ClienteRequestDTO clienteRequestDTO){
         ClienteResponseDTO clienteCriado = clienteService.criarCliente(clienteRequestDTO);
         return ResponseEntity.status(201).body(clienteCriado);
@@ -38,7 +38,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ClienteResponseDTO> atualizarClientePeloId
             (@PathVariable Long id,
              @Valid @RequestBody ClienteRequestDTO clienteRequestDTO){

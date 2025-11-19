@@ -20,7 +20,7 @@ public class FornecedorController {
     private final FornecedorService fornecedorService;
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FornecedorResponseDTO> criarFornecedor(@Valid @RequestBody FornecedorRequestDTO dto) {
         FornecedorResponseDTO fornecedorCriado = fornecedorService.criarFornecedor(dto);
         return ResponseEntity.status(201).body(fornecedorCriado);
@@ -39,7 +39,7 @@ public class FornecedorController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FornecedorResponseDTO> atualizarFornecedorPorId
             (@PathVariable Long id,
              @Valid @RequestBody FornecedorRequestDTO dto
