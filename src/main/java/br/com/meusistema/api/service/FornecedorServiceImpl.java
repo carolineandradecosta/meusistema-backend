@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FornecedorServiceImp implements FornecedorService{
+public class FornecedorServiceImpl implements FornecedorService{
 
     private final FornecedorRepository fornecedorRepository;
     private final FornecedorMapper fornecedorMapper;
@@ -26,6 +26,7 @@ public class FornecedorServiceImp implements FornecedorService{
     @Override
     public FornecedorResponseDTO criarFornecedor(FornecedorRequestDTO dto) {
         Fornecedor fornecedor = fornecedorMapper.toEntity(dto);
+        fornecedor.setEndereco(enderecoMapper.toEntity(dto.endereco()));
         return fornecedorMapper.toDTO(fornecedorRepository.save(fornecedor));
     }
 
@@ -45,7 +46,7 @@ public class FornecedorServiceImp implements FornecedorService{
 
     @Transactional
     @Override
-    public FornecedorResponseDTO atualizarFornecedorPorId(Long id, FornecedorRequestDTO dto) {
+    public FornecedorResponseDTO atualizarFornecedor(Long id, FornecedorRequestDTO dto) {
         Fornecedor fornecedor = fornecedorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado"));
 
@@ -61,7 +62,7 @@ public class FornecedorServiceImp implements FornecedorService{
 
     @Transactional
     @Override
-    public void deletarFornecedorPorId(Long id) {
+    public void deletarFornecedor(Long id) {
         if(!fornecedorRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado");
         }

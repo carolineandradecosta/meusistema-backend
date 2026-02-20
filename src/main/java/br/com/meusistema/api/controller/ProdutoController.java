@@ -28,25 +28,25 @@ public class ProdutoController {
     @GetMapping
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<List<ProdutoResponseDTO>> listarTodos() {
-        return ResponseEntity.ok(produtoService.listarTodos());
+        return ResponseEntity.ok(produtoService.listarTodosProdutos());
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<ProdutoResponseDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(produtoService.buscarPorId(id));
+        return ResponseEntity.ok(produtoService.buscarProdutoPorId(id));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody ProdutoRequestDTO produtoRequestDTO) {
-        return ResponseEntity.ok(produtoService.atualizar(id, produtoRequestDTO));
+        return ResponseEntity.ok(produtoService.atualizarProduto(id, produtoRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
-        produtoService.deletar(id);
+        produtoService.deletarProduto(id);
         return ResponseEntity.noContent().build();
     }
 

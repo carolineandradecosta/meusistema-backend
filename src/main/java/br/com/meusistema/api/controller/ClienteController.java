@@ -34,7 +34,7 @@ public class ClienteController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<ClienteResponseDTO> buscarClientePeloId (@PathVariable Long id) {
-        return ResponseEntity.ok(clienteService.buscarClientePeloId(id));
+        return ResponseEntity.ok(clienteService.buscarClientePorId(id));
     }
 
     @PutMapping("/{id}")
@@ -42,13 +42,13 @@ public class ClienteController {
     public ResponseEntity<ClienteResponseDTO> atualizarClientePeloId
             (@PathVariable Long id,
              @Valid @RequestBody ClienteRequestDTO clienteRequestDTO){
-        return ResponseEntity.ok(clienteService.atualizarClientePeloId(id, clienteRequestDTO));
+        return ResponseEntity.ok(clienteService.atualizarCliente(id, clienteRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletarClientePeloId(@PathVariable Long id){
-        clienteService.deletarClientePeloId(id);
+        clienteService.deletarCliente(id);
         return ResponseEntity.noContent().build();
     }
 

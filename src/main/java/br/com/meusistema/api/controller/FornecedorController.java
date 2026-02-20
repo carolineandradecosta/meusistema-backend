@@ -44,13 +44,13 @@ public class FornecedorController {
             (@PathVariable Long id,
              @Valid @RequestBody FornecedorRequestDTO dto
             ) {
-        return ResponseEntity.ok(fornecedorService.atualizarFornecedorPorId(id, dto));
+        return ResponseEntity.ok(fornecedorService.atualizarFornecedor(id, dto));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletarFornecedorPorId(@PathVariable Long id) {
-        fornecedorService.deletarFornecedorPorId(id);
+        fornecedorService.deletarFornecedor(id);
         return ResponseEntity.noContent().build();
     }
 

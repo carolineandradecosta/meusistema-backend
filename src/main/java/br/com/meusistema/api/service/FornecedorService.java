@@ -8,6 +8,6 @@ public interface FornecedorService {
     FornecedorResponseDTO criarFornecedor(FornecedorRequestDTO dto);
     List<FornecedorResponseDTO> listarTodosFornecedores();
     FornecedorResponseDTO buscarFornecedorPorId(Long id);
-    FornecedorResponseDTO atualizarFornecedorPorId(Long id, FornecedorRequestDTO dto);
-    void deletarFornecedorPorId(Long id);
+    FornecedorResponseDTO atualizarFornecedor(Long id, FornecedorRequestDTO dto);
+    void deletarFornecedor(Long id);
 }

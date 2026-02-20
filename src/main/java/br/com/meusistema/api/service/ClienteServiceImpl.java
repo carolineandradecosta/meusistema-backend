@@ -26,6 +26,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteResponseDTO criarCliente(ClienteRequestDTO clienteRequestDTO) {
         Cliente cliente = clienteMapper.toEntity(clienteRequestDTO);
+        cliente.setEndereco(enderecoMapper.toEntity(clienteRequestDTO.endereco()));
         return clienteMapper.toDTO(clienteRepository.save(cliente));
     }
 
@@ -37,7 +38,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteResponseDTO buscarClientePeloId(Long id) {
+    public ClienteResponseDTO buscarClientePorId(Long id) {
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -47,7 +48,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Transactional
     @Override
-    public ClienteResponseDTO atualizarClientePeloId(Long id, ClienteRequestDTO clienteRequestDTO) {
+    public ClienteResponseDTO atualizarCliente(Long id, ClienteRequestDTO clienteRequestDTO) {
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
@@ -62,7 +63,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Transactional
     @Override
-    public void deletarClientePeloId(Long id) {
+    public void deletarCliente(Long id) {
         if(!clienteRepository.existsById(id)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
         }

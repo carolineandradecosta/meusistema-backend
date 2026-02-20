@@ -26,19 +26,19 @@ public class ProdutoServiceImpl implements ProdutoService {
     public ProdutoResponseDTO criarProduto(ProdutoRequestDTO produtoRequestDTO) {
         Produto produto = produtoMapper.toEntity(produtoRequestDTO);
         produto.setFornecedor
-                (buscarFornecedor(produtoRequestDTO.fornecedorId()));
+                (buscarFornecedorPorId(produtoRequestDTO.fornecedorId()));
         return produtoMapper.toDTO(produtoRepository.save(produto));
     }
 
     @Override
-    public List<ProdutoResponseDTO> listarTodos() {
+    public List<ProdutoResponseDTO> listarTodosProdutos() {
         return produtoRepository.findAll().stream()
                 .map(produtoMapper :: toDTO)
                 .toList();
     }
 
     @Override
-    public ProdutoResponseDTO buscarPorId(Long id) {
+    public ProdutoResponseDTO buscarProdutoPorId(Long id) {
         Produto produto = produtoRepository.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -47,7 +47,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 
     @Override
-    public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO produtoRequestDTO) {
+    public ProdutoResponseDTO atualizarProduto(Long id, ProdutoRequestDTO produtoRequestDTO) {
         Produto produto = produtoRepository.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -55,13 +55,13 @@ public class ProdutoServiceImpl implements ProdutoService {
         produto.setPreco(produtoRequestDTO.preco());
         produto.setDescricao(produtoRequestDTO.descricao());
         produto.setQuantidadeEstoque(produtoRequestDTO.quantidadeEstoque());
-        produto.setFornecedor(buscarFornecedor(produtoRequestDTO.fornecedorId()));
+        produto.setFornecedor(buscarFornecedorPorId(produtoRequestDTO.fornecedorId()));
 
         return produtoMapper.toDTO(produtoRepository.save(produto));
     }
 
     @Override
-    public void deletar(Long id) {
+    public void deletarProduto(Long id) {
         if (!produtoRepository.existsById(id)) {
             throw new
                     ResponseStatusException
@@ -71,7 +71,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         produtoRepository.deleteById(id);
     }
 
-    private Fornecedor buscarFornecedor(Long id) {
+    private Fornecedor buscarFornecedorPorId(Long id) {
         return fornecedorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Fornecedor não encontrado"));
