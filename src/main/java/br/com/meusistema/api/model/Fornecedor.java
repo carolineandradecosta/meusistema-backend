@@ -30,6 +30,7 @@ public class Fornecedor {
     @Column(name = "cnpj", nullable = false, unique = true, length = 14, updatable = false)
     private String cnpj;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_fornecedor", nullable = false)
     private TipoFornecedorEnum tipoFornecedor;
 

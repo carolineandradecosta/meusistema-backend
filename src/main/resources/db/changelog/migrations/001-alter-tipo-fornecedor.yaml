@@ -1,0 +1,48 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 001-add-new-column-tipo-fornecedor
+      author: caroline
+      changes:
+        - addColumn:
+            tableName: fornecedor
+            columns:
+              - column:
+                  name: tipo_fornecedor_str
+                  type: varchar(30)
+
+  - changeSet:
+      id: 002-migrate-tipo-fornecedor
+      author: caroline
+      changes:
+        - sql:
+            sql: |
+              UPDATE fornecedor
+              SET tipo_fornecedor_str =
+                CASE
+                  WHEN tipo_fornecedor = 0 THEN 'COMUM'
+                  WHEN tipo_fornecedor = 1 THEN 'PREMIUM'
+                END;
+
+  - changeSet:
+      id: 003-replace-tipo-fornecedor-column
+      author: caroline
+      changes:
+        - dropColumn:
+            tableName: fornecedor
+            columnName: tipo_fornecedor
+
+        - renameColumn:
+            tableName: fornecedor
+            oldColumnName: tipo_fornecedor_str
+            newColumnName: tipo_fornecedor
+            columnDataType: varchar(30)
+
+  - changeSet:
+      id: 004-add-not-null-tipo-fornecedor
+      author: caroline
+      changes:
+        - addNotNullConstraint:
+            tableName: fornecedor
+            columnName: tipo_fornecedor
+            columnDataType: varchar(30)
